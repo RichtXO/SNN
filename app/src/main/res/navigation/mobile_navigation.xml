@@ -22,4 +22,10 @@
         android:name="com.example.snn.ui.remove.RemoveFragment"
         android:label="@string/title_remove"
         tools:layout="@layout/fragment_remove" />
+
+    <fragment
+        android:id="@+id/navigation_killed"
+        android:name="com.example.snn.ui.killed.KilledFragment"
+        android:label="@string/title_killed"
+        tools:layout="@layout/fragment_killed" />
 </navigation>

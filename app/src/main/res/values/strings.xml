@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">SNN</string>
     <string name="title_home">Home</string>
-    <string name="title_add">Add People</string>
-    <string name="title_remove">Remove People</string>
+    <string name="title_add">Add</string>
+    <string name="title_remove">Remove</string>
+    <string name="title_killed">Killed</string>
+    <string name="submit">Submit</string>
+    <string name="randomize">Randomize</string>
 </resources>
