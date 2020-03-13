@@ -22,7 +22,7 @@ public class RemoveFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         removeViewModel =
                 ViewModelProviders.of(this).get(RemoveViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_add, container, false);
+        View root = inflater.inflate(R.layout.fragment_remove, container, false);
         final TextView textView = root.findViewById(R.id.text_remove);
         removeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
