@@ -6,4 +6,9 @@
     <string name="title_killed">Killed</string>
     <string name="submit">Submit</string>
     <string name="randomize">Randomize</string>
+    <string name="remove_all_players">Remove All Players</string>
+    <string name="title_score">Scores</string>
+    <string name="enter_name_add">Enter Name to Add:</string>
+    <string name="enter_name_remove">Enter Name to Remove from Game:</string>
+    <string name="enter_name_killed">Enter Name who got Killed:</string>
 </resources>

@@ -28,4 +28,10 @@
         android:name="com.example.snn.ui.killed.KilledFragment"
         android:label="@string/title_killed"
         tools:layout="@layout/fragment_killed" />
+
+    <fragment
+        android:id="@+id/navigation_score"
+        android:name="com.example.snn.ui.score.ScoreFragment"
+        android:label="@string/title_score"
+        tools:layout="@layout/fragment_score" />
 </navigation>

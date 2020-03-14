@@ -1,6 +1,8 @@
 package com.example.snn;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,7 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import android.util.Log;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,18 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-    }
 
+
+        Button randomBtn = findViewById(R.id.randomButton);
+
+        randomBtn.setOnClickListener(
+            new Button.OnClickListener(){
+                public void onClick(View v){
+
+                }
+            }
+        );
+
+
+    }
 }
