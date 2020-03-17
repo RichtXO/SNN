@@ -23,21 +23,11 @@ public class AddFragment extends Fragment {
 
     addListener activityCommander;
     public interface addListener{
-        public void createPlayer(String name);
+        public void addPlayer(String name);
     }
 
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try{
-            activityCommander = (addListener) activity;
-        }catch (ClassCastException e){
-            throw new ClassCastException(activity.toString());
-        }
-    }
-
-
+/*
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +48,7 @@ public class AddFragment extends Fragment {
         return view;
     }
 
-    /*
+    */
     private AddViewModel addViewModel;
 
 
@@ -72,11 +62,25 @@ public class AddFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        nameInput = root.findViewById(R.id.editAdd);
+        final Button addBtn = root.findViewById(R.id.addButton);
+
+        addBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        buttonClicked(view);
+                    }
+                }
+        );
+
+
+
         return root;
     }
-    */
 
     private void buttonClicked(View view){
-        activityCommander.createPlayer(nameInput.getText().toString());
+        activityCommander.addPlayer(nameInput.getText().toString());
     }
 }

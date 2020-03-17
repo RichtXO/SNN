@@ -1,17 +1,18 @@
 package com.example.snn;
 
 
-public class pair{
+public class Pair{
 
-    private player[] assignedTarget;
-
-
-    public pair(player assignedPlayer, player target){
-        assignedTarget = new player[]{ assignedPlayer, target}; }
+    private Player[] assignedTarget;
 
 
-    public void changeAssignedPlayer(player newPlayer){ assignedTarget[0] = newPlayer; }
-    public void changeTarget(player target){ assignedTarget[1] = target; }
+    public Pair(Player assignedPlayer, Player target){
+        assignedTarget = new Player[] {assignedPlayer, target};
+    }
+
+
+    public void changeAssignedPlayer(Player player){ assignedTarget[0] = player; }
+    public void changeTarget(Player target){ assignedTarget[1] = target; }
 
     public String getAssignedPlayerName(){return assignedTarget[0].getName();}
     public int getAssignedPlayerScore(){return assignedTarget[0].getScore();}

@@ -4,17 +4,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.snn.ui.add.AddFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity implements AddFragment.addListener {
 
     private static final String TAG = "Message";
+    GameSession game = new GameSession();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +44,13 @@ public class MainActivity extends AppCompatActivity {
         );
 
 
+    }
+
+
+    // Gets called by AddFragment when user is adding a player to DB
+    @Override
+    public void addPlayer(String name) {
+        Player player = new Player(name);
+        game.addPlayer(player);
     }
 }
