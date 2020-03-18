@@ -19,12 +19,24 @@ public class GameSession {
     public ArrayList<Pair> getTargets(){ return targets; }
 
     public void addPlayer(Player player){ in_game.add(player); }
-    public void removePlayer(Player player){ in_game.remove(player); }
+    public void removePlayer(String name){
+        for (int i = 0; i < in_game.size(); i++){
+            if (in_game.get(i).getName().equals(name)) {
+                in_game.remove(in_game.get(i));
+                break;
+            }
+        }
+        for (int i = 0; i < dead.size(); i++) {
+            if (dead.get(i).getName().equals(name)) {
+                dead.remove(dead.get(i));
+                break;
+            }
+        }
+    }
     public void removeAllPlayers(){ in_game.clear(); dead.clear(); targets.clear(); }
 
     public void killedPlayer(Player killed){
         dead.add(killed);
-        in_game.remove(killed);
         killed.killed();
 
         // Have to do something with target list

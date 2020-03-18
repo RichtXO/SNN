@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.snn.ui.home.HomeFragment"
+        android:name="com.example.snn.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_add"
-        android:name="com.example.snn.ui.add.AddFragment"
+        android:name="com.example.snn.ui.AddFragment"
         android:label="@string/title_add"
         tools:layout="@layout/fragment_add" />
 
     <fragment
         android:id="@+id/navigation_remove"
-        android:name="com.example.snn.ui.remove.RemoveFragment"
+        android:name="com.example.snn.ui.RemoveFragment"
         android:label="@string/title_remove"
         tools:layout="@layout/fragment_remove" />
 
     <fragment
         android:id="@+id/navigation_killed"
-        android:name="com.example.snn.ui.killed.KilledFragment"
+        android:name="com.example.snn.ui.KilledFragment"
         android:label="@string/title_killed"
         tools:layout="@layout/fragment_killed" />
 
     <fragment
         android:id="@+id/navigation_score"
-        android:name="com.example.snn.ui.score.ScoreFragment"
+        android:name="com.example.snn.ui.ScoreFragment"
         android:label="@string/title_score"
         tools:layout="@layout/fragment_score" />
 </navigation>
