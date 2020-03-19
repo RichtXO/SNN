@@ -1,5 +1,6 @@
 package com.example.snn;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +20,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_NAME = "_name";
     public static final String COLUMN_SCORE = "_score";
     public static final String COLUMN_DEATH = "_death";
-
 
 
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
@@ -45,7 +45,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addPlayer(Player player){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, player.getName());
+        values.put(COLUMN_NAME, player.getName());
         values.put(COLUMN_SCORE, player.getScore());
         values.put(COLUMN_DEATH, player.getDeath());
         db.insert(TABLE_PLAYERS, null, values);
@@ -90,15 +90,18 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<String> getTablePlayerNames(){
         ArrayList<String> result = new ArrayList<String>();
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT " + COLUMN_NAME + " FROM " + TABLE_PLAYERS;
 
-        Cursor c = db.rawQuery(query, null);
+        String[] projection = {COLUMN_NAME};
+        String sortOrder = COLUMN_NAME + " DESC";
+        Cursor c = db.query(TABLE_PLAYERS, projection,null,null,null,null, sortOrder);
+
         c.moveToFirst();
-        while(!c.isAfterLast()){
-            if (c.getString(c.getColumnIndex("playername")) != null){
-                result.add(c.getString(c.getColumnIndex("playername")));
+        while(c.moveToNext()){
+            if (c.getString(c.getColumnIndex(COLUMN_NAME)) != null){
+                result.add(c.getString(c.getColumnIndex(COLUMN_NAME)));
             }
         }
+        c.close();
         db.close();
         return result;
     }
@@ -107,20 +110,21 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<Player> getTablePlayers(){
         ArrayList<Player> result = new ArrayList<Player>();
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_PLAYERS + ";";
 
+        String[] projection = {COLUMN_NAME, COLUMN_SCORE, COLUMN_DEATH};
+        String sortOrder = COLUMN_NAME + " DESC";
+        Cursor c = db.query(TABLE_PLAYERS, projection,null,null,null,null, sortOrder);
 
-        Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
-        while(!c.isAfterLast()){
-            if (c.getString(c.getColumnIndex("playername")) != null){
-                Player temp = new Player(c.getString(c.getColumnIndex("playername")),
-                        c.getInt(c.getColumnIndex("score")),
-                        c.getInt(c.getColumnIndex("death")));
+        while(c.moveToNext()){
+            if (c.getString(c.getColumnIndex(COLUMN_NAME)) != null){
+                Player temp = new Player(c.getString(c.getColumnIndex(COLUMN_NAME)),
+                        c.getInt(c.getColumnIndex(COLUMN_SCORE)),
+                        c.getInt(c.getColumnIndex(COLUMN_DEATH)));
                 result.add(temp);
             }
         }
-
+        c.close();
         db.close();
         return result;
     }

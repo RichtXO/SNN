@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.snn.MainActivity;
 import com.example.snn.Player;
 import com.example.snn.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
 
 
 
-        Button randomBtn = view.findViewById(R.id.randomButton);
+        FloatingActionButton randomBtn = view.findViewById(R.id.randomButton);
 
         randomBtn.setOnClickListener(
                 new Button.OnClickListener(){

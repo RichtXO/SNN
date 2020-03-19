@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     // Gets called by KilledFragment when a player got shot in game
     @Override
     public void killed(String name){
-        game.killedPlayer(new Player(name));
+        game.killedPlayer(name);
         dbAccess.updateKilled(game.getPlayer(name));
     }
 

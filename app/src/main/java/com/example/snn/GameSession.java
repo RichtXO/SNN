@@ -61,15 +61,20 @@ public class GameSession {
         return null;
     }
 
-    public void killedPlayer(Player killed){
-        dead.add(killed);
-        killed.killed();
+    public void killedPlayer(String killed){
+        Player player = new Player(killed);
+        for (Player i : in_game){
+            if (i.getName().equals(killed))
+                player = i;
+        }
+        player.killed();
+        dead.add(player);
         boolean ifBreak = false;
         for (Player[] x : pairs){
-            if (x[1] == killed){
+            if (x[1] == player){
                 Player killer = x[0];
                 for (Player[] y: pairs){
-                    if (y[0] == killed){
+                    if (y[0] == player){
                         Player[] tempPair = {killer, y[0]};
                         pairs.add(tempPair);
                         pairs.remove(x);
@@ -95,7 +100,7 @@ public class GameSession {
             if (randomSelected == in_game.get(i))
                 randomSelected = getRandomPlayer(temp);
             temp.remove(randomSelected);
-            Player[] tempPair = {in_game.get(i), getRandomPlayer(temp)};
+            Player[] tempPair = {in_game.get(i), randomSelected};
             pairs.add(tempPair);
         }
     }
