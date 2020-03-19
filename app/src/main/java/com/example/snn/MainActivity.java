@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
 
     private static final String TAG = "Message";
     GameSession game = new GameSession();
+    DBHandler dbAccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +38,52 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        dbAccess = new DBHandler(this, null, null, 1);
+        dbStartUp();
+
+    }
+
+
+    public void dbStartUp(){
+        game.setPlayers(dbAccess.getTablePlayers());
     }
 
 
     // Gets called by AddFragment when user is adding player to game
     @Override
-    public void addPlayer(String name) { game.addPlayer(new Player(name)); }
+    public void addPlayer(String name) {
+        Player player = new Player(name);
+        game.addPlayer(player);
+        dbAccess.addPlayer(player);
+    }
+
 
 
     // Gets called by RemoveFragment when user is removing player from game
     @Override
-    public void removePlayer(String name){ game.removePlayer(name); }
+    public void removePlayer(String name){
+        game.removePlayer(name);
+        dbAccess.deletePlayer(name);
+    }
 
     // Gets called by RemoveFragment when user wants to delete player list
     @Override
     public void removeAllPlayers(){
         game.removeAllPlayers();
+        dbAccess.deleteGame();
     }
+
 
 
     // Gets called by KilledFragment when a player got shot in game
     @Override
-    public void killed(String name){ game.killedPlayer(new Player(name)); }
+    public void killed(String name){
+        game.killedPlayer(new Player(name));
+        dbAccess.updateKilled(game.getPlayer(name));
+    }
+
 
 
     // Gets called by HomeFragment to get the names sorted
@@ -72,6 +97,15 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
         return result;
     }
 
+    // Gets called by HomeFragment to randomized targets for each players
+    @Override
+    public void randomized() { game.randomize(); }
+
+    // Gets called by HomeFragment to get the target of that player
+    @Override
+    public String getTarget(String name) { return (game.whoTarget(name)).getName(); }
+
+
 
     // Gets called by ScoreFragment to have the highest scored player go on top
     @Override
@@ -82,5 +116,4 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
         Arrays.sort(result);
         return result;
     }
-
 }

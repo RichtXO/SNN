@@ -27,11 +27,10 @@ class rowAdapter extends ArrayAdapter<String> {
 
 
         String firstName = getItem(position);
-        Button btn = (Button) rowView.findViewById(R.id.Btn);
+        Button btn = rowView.findViewById(R.id.Btn);
 
 
         btn.setText(firstName);
-
         return rowView;
     }
 }

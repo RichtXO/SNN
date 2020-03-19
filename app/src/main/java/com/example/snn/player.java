@@ -1,25 +1,34 @@
 package com.example.snn;
 
-public class Player {
+public class Player implements Comparable<Player>{
 
-    private String name;
-    private int score;
-    private int death;
+    private int _id;
+    private String _playername;
+    private int _score;
+    private int _death;
 
     public Player(String playerName){
-        name = playerName;
-        score = 0;
-        death = 0;
+        this._playername = playerName;
+        this._score = 0;
+        this._death = 0;
     }
 
-    public String getName(){ return name; }
-    public int getScore(){ return score; }
-    public int getDeath(){ return death; }
+    public Player(String name, int score, int death){
+        this._playername = name;
+        this._score = score;
+        this._death = death;
+    }
 
-    public void setName(String playerName){ name = playerName; }
-    public void setScore(int numScore){ score = numScore; }
-    public void setDeath(int numDeath){ death = numDeath; }
+    public String getName(){ return this._playername; }
+    public int getScore(){ return this._score; }
+    public int getDeath(){ return this._death; }
 
-    public void targetKilled(){ score++; }
-    public void killed(){ death++; }
+    public void setName(String playerName){ this._playername = playerName; }
+    public void setScore(int numScore){ this._score = numScore; }
+    public void setDeath(int numDeath){ this._death = numDeath; }
+
+    public void targetKilled(){ this._score++; }
+    public void killed(){ this._death++; }
+
+    public int compareTo(Player a){ return getScore() - a.getScore(); }
 }

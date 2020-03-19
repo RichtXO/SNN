@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.targetDisplay" android:theme="@style/AppTheme.popUp"></activity>
     </application>
 
 </manifest>
