@@ -10,9 +10,9 @@ public class GameSession {
 
 
     public GameSession() {
-        in_game = new ArrayList<Player>();
-        dead = new ArrayList<Player>();
-        pairs = new ArrayList<Player[]>();
+        in_game = new ArrayList<>();
+        dead = new ArrayList<>();
+        pairs = new ArrayList<>();
     }
 
     public ArrayList<Player> getIn_game(){ return in_game; }
@@ -46,7 +46,7 @@ public class GameSession {
 
 
     public void setPlayers(ArrayList<Player> list){
-        this.in_game = (ArrayList<Player>) list.clone();
+        this.in_game = new ArrayList<>(list);
         randomize();
     }
 
@@ -90,10 +90,8 @@ public class GameSession {
     }
 
 
-
-
     public void randomize(){
-        ArrayList<Player> temp = (ArrayList<Player>) in_game.clone();
+        ArrayList<Player> temp = new ArrayList<>(in_game);
 
         for (int i = 0; i < in_game.size(); i++){
             Player randomSelected = getRandomPlayer(temp);

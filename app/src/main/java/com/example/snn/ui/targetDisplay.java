@@ -14,7 +14,7 @@ public class targetDisplay extends Activity {
 
     targetDisplayListener activityCommander;
     public interface targetDisplayListener{
-        public String getTargetName();
+        String getTargetName();
     }
 
     @SuppressLint("SetTextI18n")

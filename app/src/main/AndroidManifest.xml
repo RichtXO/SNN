@@ -18,7 +18,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.targetDisplay" android:theme="@style/AppTheme.popUp"></activity>
+        <activity
+            android:name=".ui.targetDisplay"
+            android:theme="@style/AppTheme.popUp" />
     </application>
 
 </manifest>

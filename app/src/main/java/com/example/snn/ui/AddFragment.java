@@ -1,6 +1,5 @@
 package com.example.snn.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,9 +21,9 @@ public class AddFragment extends Fragment {
 
     private static EditText nameInput;
 
-    addListener activityCommander;
+    private addListener activityCommander;
     public interface addListener{
-        public void addPlayer(String name);
+        void addPlayer(String name);
     }
 
 

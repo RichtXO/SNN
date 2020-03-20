@@ -11,8 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.snn.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,8 +23,8 @@ public class RemoveFragment extends Fragment {
 
     removeListener activityCommander;
     public interface removeListener{
-        public void removePlayer(String name);
-        public void removeAllPlayers();
+        void removePlayer(String name);
+        void removeAllPlayers();
     }
 
 

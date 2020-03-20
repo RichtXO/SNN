@@ -15,8 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.snn.MainActivity;
-import com.example.snn.Player;
 import com.example.snn.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,11 +26,11 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
 
     private String killer;
 
-    homeListener activityCommander;
+    private homeListener activityCommander;
     public interface homeListener {
-        public String[] getPlayerNames();
-        public String getTarget(String name);
-        public void randomized();
+        String[] getPlayerNames();
+        String getTarget(String name);
+        void randomized();
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.example.snn;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.TableLayout;
 
 import java.util.ArrayList;
 
@@ -88,7 +86,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Return a string with player names as string
     public ArrayList<String> getTablePlayerNames(){
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
 
         String[] projection = {COLUMN_NAME};
@@ -108,7 +106,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Return a string with all players' data
     public ArrayList<Player> getTablePlayers(){
-        ArrayList<Player> result = new ArrayList<Player>();
+        ArrayList<Player> result = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
 
         String[] projection = {COLUMN_NAME, COLUMN_SCORE, COLUMN_DEATH};

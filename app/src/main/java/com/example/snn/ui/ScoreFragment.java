@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import com.example.snn.Player;
 import com.example.snn.R;
 
-import java.util.Objects;
 
 public class ScoreFragment extends Fragment {
 
@@ -25,7 +24,7 @@ public class ScoreFragment extends Fragment {
 
    scoreListener activityCommander;
     public interface scoreListener {
-        public Player[] getPlayers();
+        Player[] getPlayers();
     }
 
     @Override

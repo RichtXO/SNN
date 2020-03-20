@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import com.example.snn.Player;
 import com.example.snn.R;
 
-import java.util.Objects;
 
 class scoreAdapter extends ArrayAdapter<Player> {
 
@@ -31,8 +30,8 @@ class scoreAdapter extends ArrayAdapter<Player> {
         TextView death = scoreView.findViewById(R.id.displayDeath);
 
         name.setText(getItem(position).getName());
-        score.setText("Score: " + Integer.toString(getItem(position).getScore()));
-        death.setText("Death:" + Integer.toString(getItem(position).getDeath()));
+        score.setText("Score: " + getItem(position).getScore());
+        death.setText("Death:" + getItem(position).getDeath());
 
 
         return scoreView;
