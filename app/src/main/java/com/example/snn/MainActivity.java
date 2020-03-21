@@ -13,6 +13,7 @@ import com.example.snn.ui.HomeFragment;
 import com.example.snn.ui.KilledFragment;
 import com.example.snn.ui.RemoveFragment;
 import com.example.snn.ui.ScoreFragment;
+import com.example.snn.ui.targetDisplay;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     // Gets called by AddFragment when user is adding player to game
     @Override
     public void addPlayer(String name) {
-        Player player = new Player(name);
+        Player player = new Player(name.toLowerCase());
         game.addPlayer(player);
         dbAccess.addPlayer(player);
     }
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     // Gets called by RemoveFragment when user is removing player from game
     @Override
     public void removePlayer(String name){
-        game.removePlayer(name);
-        dbAccess.deletePlayer(name);
+        game.removePlayer(name.toLowerCase());
+        dbAccess.deletePlayer(name.toLowerCase());
     }
 
     // Gets called by RemoveFragment when user wants to delete player list
@@ -80,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     // Gets called by KilledFragment when a player got shot in game
     @Override
     public void killed(String name){
-        game.killedPlayer(name);
-        dbAccess.updateKilled(game.getPlayer(name));
+        game.killedPlayer(name.toLowerCase());
+        dbAccess.updateKilled(game.getDeadPlayer(name.toLowerCase()));
     }
 
 
@@ -103,16 +104,20 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
 
     // Gets called by HomeFragment to get the target of that player
     @Override
-    public String getTarget(String name) { return (game.whoTarget(name)).getName(); }
-
+    public String getTarget(String name) {
+        String result = game.whoTarget(name.toLowerCase()).getName();
+        result = result.substring(0,1).toUpperCase() + result.substring(1).toLowerCase();
+        return result;
+    }
 
 
     // Gets called by ScoreFragment to have the highest scored player go on top
     @Override
     public Player[] getPlayers(){
         Player[] result = new Player[game.getIn_game().size()];
-        for (int i = 0; i < game.getIn_game().size(); i++)
-            result[i] = (game.getIn_game()).get(i);
+        int tempSize;
+        for (tempSize = 0; tempSize < game.getIn_game().size(); tempSize++)
+            result[tempSize] = (game.getIn_game()).get(tempSize);
         Arrays.sort(result);
         return result;
     }

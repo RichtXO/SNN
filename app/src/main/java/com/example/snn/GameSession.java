@@ -18,15 +18,24 @@ public class GameSession {
     public ArrayList<Player> getIn_game(){ return in_game; }
     public ArrayList<Player> getDead(){ return dead; }
     public Player getPlayer(String name){
-        for (int i = 0; i < in_game.size(); i++){
-            if (in_game.get(i).getName().equals(name))
-                return in_game.get(i);
+        for (Player i : in_game){
+            if (i.getName().equals(name)){
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public Player getDeadPlayer(String name){
+        for (Player i : dead){
+            if (i.getName().equals(name))
+                return i;
         }
         return null;
     }
 
 
-    public void addPlayer(Player player){ in_game.add(player); }
+    public void addPlayer(Player player){ in_game.add(player); randomize(); }
     public void removePlayer(String name){
         for (int i = 0; i < in_game.size(); i++){
             if (in_game.get(i).getName().equals(name)) {
@@ -68,6 +77,7 @@ public class GameSession {
                 player = i;
         }
         player.killed();
+        in_game.remove(player);
         dead.add(player);
         boolean ifBreak = false;
         for (Player[] x : pairs){
@@ -89,8 +99,17 @@ public class GameSession {
         }
     }
 
+    private void reset(){
+        in_game.addAll(dead);
+//        for (Player i : in_game){
+//            i.setDeath(0);
+//            i.setScore(0);
+//        }
+    }
+
 
     public void randomize(){
+        reset();
         ArrayList<Player> temp = new ArrayList<>(in_game);
 
         for (int i = 0; i < in_game.size(); i++){

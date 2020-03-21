@@ -72,15 +72,21 @@ public class RemoveFragment extends Fragment {
     }
 
     private void removeBtnClicked(View view){
-        activityCommander.removePlayer(nameInput.getText().toString());
-        Toast.makeText(getContext(), nameInput.getText().toString() + " has been removed from game", Toast.LENGTH_LONG).show();
-        nameInput.getText().clear();
+        if (!nameInput.getText().toString().equals("")){
+            activityCommander.removePlayer(nameInput.getText().toString());
+            Toast.makeText(getContext(), nameInput.getText().toString() + " has been removed from game", Toast.LENGTH_SHORT).show();
+            nameInput.getText().clear();
+        }
+        else{
+            Toast.makeText(getContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
     private void removeAllBtnClicked(View view){
         activityCommander.removeAllPlayers();
-        Toast.makeText(getContext(), "Cleared Player List", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Cleared Player List", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -60,8 +60,13 @@ public class AddFragment extends Fragment {
     }
 
     private void buttonClicked(View view){
-        activityCommander.addPlayer(nameInput.getText().toString());
-        Toast.makeText(getContext(), nameInput.getText().toString() + " is added", Toast.LENGTH_LONG).show();
-        nameInput.getText().clear();
+        if (!nameInput.getText().toString().equals("")){
+            activityCommander.addPlayer(nameInput.getText().toString());
+            Toast.makeText(getContext(), nameInput.getText().toString() + " is added", Toast.LENGTH_SHORT).show();
+            nameInput.getText().clear();
+        }
+        else{
+            Toast.makeText(getContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.snn.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,7 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class HomeFragment extends Fragment implements targetDisplay.targetDisplayListener {
+public class HomeFragment extends Fragment {
 
 
     private String killer;
@@ -29,8 +31,8 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
     private homeListener activityCommander;
     public interface homeListener {
         String[] getPlayerNames();
-        String getTarget(String name);
         void randomized();
+        public String getTarget(String name);
     }
 
     @Override
@@ -52,7 +54,8 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
 
         String[] names = activityCommander.getPlayerNames();
         Arrays.sort(names);
-        ListAdapter listAdapter = new rowAdapter(getContext(), names);
+        //ListAdapter listAdapter = new rowAdapter(getContext(), names);
+        ListAdapter listAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, names);
         ListView home = view.findViewById(R.id.playerListView);
         home.setAdapter(listAdapter);
 
@@ -61,8 +64,11 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        killer = String.valueOf(adapterView.getItemAtPosition(i));
-                        startActivity(new Intent(getActivity(), targetDisplay.class));
+                        killer = activityCommander.getTarget(String.valueOf(adapterView.getItemAtPosition(i)));
+                        killer = killer.substring(0,1).toUpperCase() + killer.substring(1).toLowerCase();
+                        Intent intent = new Intent(getActivity(), targetDisplay.class);
+                        intent.putExtra("killerName", killer);
+                        startActivity(intent);
                     }
                 }
         );
@@ -76,6 +82,8 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         randomBtnClicked();
+                        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                        ft.detach(HomeFragment.this).attach(HomeFragment.this).commit();
                     }
                 }
         );
@@ -88,11 +96,4 @@ public class HomeFragment extends Fragment implements targetDisplay.targetDispla
     private void randomBtnClicked(){
         activityCommander.randomized();
     }
-
-
-    @Override
-    public String getTargetName(){
-        return activityCommander.getTarget(killer);
-    }
-
 }

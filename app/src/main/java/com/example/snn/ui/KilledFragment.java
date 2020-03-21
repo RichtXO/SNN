@@ -60,8 +60,14 @@ public class KilledFragment extends Fragment {
     }
 
     private void btnClicked(View view){
-        activityCommander.killed(nameInput.getText().toString());
-        Toast.makeText(getContext(), nameInput.getText().toString() + " has been marked KILLED", Toast.LENGTH_LONG).show();
-        nameInput.getText().clear();
+        if (!nameInput.getText().toString().equals("")){
+            activityCommander.killed(nameInput.getText().toString());
+            Toast.makeText(getContext(), nameInput.getText().toString() + " has been marked KILLED", Toast.LENGTH_SHORT).show();
+            nameInput.getText().clear();
+        }
+        else{
+            Toast.makeText(getContext(), "Enter in name.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
