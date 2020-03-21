@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
         RemoveFragment.removeListener, KilledFragment.killedListener, HomeFragment.homeListener,
         ScoreFragment.scoreListener {
 
-    GameSession game = new GameSession();
-    DBHandler dbAccess;
+    private final GameSession game = new GameSession();
+    private DBHandler dbAccess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +45,24 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     }
 
 
-    public void dbStartUp(){
+    private void dbStartUp(){
         game.setPlayers(dbAccess.getTablePlayers());
     }
 
+
+    @Override
+    public boolean ifExist(String name) {
+        name = name.toLowerCase();
+        for (Player i : game.getIn_game()){
+            if (i.getName().equals(name))
+                return true;
+        }
+        for (Player i : game.getDead()){
+            if (i.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
 
     // Gets called by AddFragment when user is adding player to game
     @Override

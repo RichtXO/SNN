@@ -22,7 +22,7 @@ public class ScoreFragment extends Fragment {
 
     private TextView message;
 
-   scoreListener activityCommander;
+    private scoreListener activityCommander;
     public interface scoreListener {
         Player[] getPlayers();
     }

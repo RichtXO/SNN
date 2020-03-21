@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     public interface homeListener {
         String[] getPlayerNames();
         void randomized();
-        public String getTarget(String name);
+        String getTarget(String name);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         String[] names = activityCommander.getPlayerNames();
         Arrays.sort(names);
         //ListAdapter listAdapter = new rowAdapter(getContext(), names);
-        ListAdapter listAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, names);
+        ListAdapter listAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, names);
         ListView home = view.findViewById(R.id.playerListView);
         home.setAdapter(listAdapter);
 

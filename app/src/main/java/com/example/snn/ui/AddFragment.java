@@ -19,11 +19,12 @@ import java.util.Objects;
 
 public class AddFragment extends Fragment {
 
-    private static EditText nameInput;
+    private EditText nameInput;
 
     private addListener activityCommander;
     public interface addListener{
         void addPlayer(String name);
+        boolean ifExist(String name);
     }
 
 
@@ -60,13 +61,20 @@ public class AddFragment extends Fragment {
     }
 
     private void buttonClicked(View view){
-        if (!nameInput.getText().toString().equals("")){
-            activityCommander.addPlayer(nameInput.getText().toString());
-            Toast.makeText(getContext(), nameInput.getText().toString() + " is added", Toast.LENGTH_SHORT).show();
+        if (nameInput.getText().toString().equals("")){
+            Toast.makeText(getContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+        }
+        else if (activityCommander.ifExist(nameInput.getText().toString())) {
+            Toast.makeText(getContext(), nameInput.getText().toString().substring(0, 1).toUpperCase() +
+                            nameInput.getText().toString().substring(1).toLowerCase() + " is already added",
+                    Toast.LENGTH_SHORT).show();
             nameInput.getText().clear();
         }
-        else{
-            Toast.makeText(getContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+        else {
+            activityCommander.addPlayer(nameInput.getText().toString());
+            Toast.makeText(getContext(), nameInput.getText().toString().substring(0,1).toUpperCase() +
+                    nameInput.getText().toString().substring(1).toLowerCase() + " is added", Toast.LENGTH_SHORT).show();
+            nameInput.getText().clear();
         }
     }
 }

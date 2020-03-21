@@ -19,11 +19,12 @@ import java.util.Objects;
 
 public class KilledFragment extends Fragment {
 
-    private static EditText nameInput;
+    private EditText nameInput;
 
-    killedListener activityCommander;
+    private killedListener activityCommander;
     public interface killedListener{
         void killed(String name);
+        boolean ifExist(String name);
     }
 
 
@@ -60,13 +61,21 @@ public class KilledFragment extends Fragment {
     }
 
     private void btnClicked(View view){
-        if (!nameInput.getText().toString().equals("")){
+
+        if (nameInput.getText().toString().equals("")){
+            Toast.makeText(getContext(), "Enter in name.", Toast.LENGTH_SHORT).show();
+        }
+        else if (activityCommander.ifExist(nameInput.getText().toString())){
             activityCommander.killed(nameInput.getText().toString());
-            Toast.makeText(getContext(), nameInput.getText().toString() + " has been marked KILLED", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), nameInput.getText().toString().substring(0,1).toUpperCase() +
+                    nameInput.getText().toString().substring(1).toLowerCase() + " has been marked KILLED", Toast.LENGTH_SHORT).show();
             nameInput.getText().clear();
         }
         else{
-            Toast.makeText(getContext(), "Enter in name.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), nameInput.getText().toString().substring(0, 1).toUpperCase() +
+                            nameInput.getText().toString().substring(1).toLowerCase() + " doesn't exist in game",
+                    Toast.LENGTH_SHORT).show();
+            nameInput.getText().clear();
         }
 
     }

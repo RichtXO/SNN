@@ -2,11 +2,11 @@ package com.example.snn;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GameSession {
+class GameSession {
 
     private ArrayList<Player> in_game;
-    private ArrayList<Player[]>pairs;
-    private ArrayList<Player> dead;
+    private final ArrayList<Player[]>pairs;
+    private final ArrayList<Player> dead;
 
 
     public GameSession() {
@@ -109,10 +109,6 @@ public class GameSession {
         in_game.addAll(dead);
         pairs.clear();
         dead.clear();
-//        for (Player i : in_game){
-//            i.setDeath(0);
-//            i.setScore(0);
-//        }
     }
 
 
@@ -139,7 +135,7 @@ public class GameSession {
     }
 
 
-    public Player getRandomPlayer(ArrayList<Player> tempList){
+    private Player getRandomPlayer(ArrayList<Player> tempList){
         Random random = new Random();
         return tempList.get(random.nextInt(tempList.size()));
     }

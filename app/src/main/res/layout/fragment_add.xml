@@ -20,6 +20,7 @@
 
     <EditText
         android:id="@+id/editAdd"
+        android:hint="@string/editAddHint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

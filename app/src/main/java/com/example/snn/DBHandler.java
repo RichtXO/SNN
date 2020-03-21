@@ -8,16 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-public class DBHandler extends SQLiteOpenHelper {
+class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME= "game_session.db";
 
-    public static final String TABLE_PLAYERS = "players";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_NAME = "_name";
-    public static final String COLUMN_SCORE = "_score";
-    public static final String COLUMN_DEATH = "_death";
+    private static final String TABLE_PLAYERS = "players";
+    private static final String COLUMN_ID = "_id";
+    private static final String COLUMN_NAME = "_name";
+    private static final String COLUMN_SCORE = "_score";
+    private static final String COLUMN_DEATH = "_death";
 
 
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){

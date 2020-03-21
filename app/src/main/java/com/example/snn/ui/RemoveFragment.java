@@ -19,12 +19,13 @@ import java.util.Objects;
 
 public class RemoveFragment extends Fragment {
 
-    private static EditText nameInput;
+    private EditText nameInput;
 
-    removeListener activityCommander;
+    private removeListener activityCommander;
     public interface removeListener{
         void removePlayer(String name);
         void removeAllPlayers();
+        boolean ifExist(String name);
     }
 
 
@@ -72,15 +73,21 @@ public class RemoveFragment extends Fragment {
     }
 
     private void removeBtnClicked(View view){
-        if (!nameInput.getText().toString().equals("")){
-            activityCommander.removePlayer(nameInput.getText().toString());
-            Toast.makeText(getContext(), nameInput.getText().toString() + " has been removed from game", Toast.LENGTH_SHORT).show();
+        if (nameInput.getText().toString().equals("")){
+            Toast.makeText(getContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+        }
+        else if (!activityCommander.ifExist(nameInput.getText().toString())) {
+            Toast.makeText(getContext(), nameInput.getText().toString().substring(0, 1).toUpperCase() +
+                            nameInput.getText().toString().substring(1).toLowerCase() + " is already removed",
+                    Toast.LENGTH_SHORT).show();
             nameInput.getText().clear();
         }
         else{
-            Toast.makeText(getContext(), "Enter a name", Toast.LENGTH_SHORT).show();
+                activityCommander.removePlayer(nameInput.getText().toString());
+                Toast.makeText(getContext(), nameInput.getText().toString().substring(0,1).toUpperCase() +
+                        nameInput.getText().toString().substring(1).toLowerCase() + " has been removed from game", Toast.LENGTH_SHORT).show();
+                nameInput.getText().clear();
         }
-
     }
 
 

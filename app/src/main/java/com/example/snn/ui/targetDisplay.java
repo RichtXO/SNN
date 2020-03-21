@@ -2,18 +2,11 @@ package com.example.snn.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.example.snn.MainActivity;
 import com.example.snn.R;
-
-import java.util.Objects;
 
 public class targetDisplay extends Activity {
 
