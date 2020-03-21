@@ -80,7 +80,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_SCORE, player.getScore());
-        db.update(TABLE_PLAYERS, cv, "_name="+player.getName(), null);
+        db.update(TABLE_PLAYERS, cv, "_name='"+player.getName() + "'", null);
         db.close();
     }
 

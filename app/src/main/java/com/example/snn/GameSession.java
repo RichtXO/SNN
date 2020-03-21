@@ -35,14 +35,19 @@ public class GameSession {
     }
 
 
-    public void addPlayer(Player player){ in_game.add(player); randomize(); }
-    public void removePlayer(String name){
-        for (int i = 0; i < in_game.size(); i++){
-            if (in_game.get(i).getName().equals(name)) {
-                in_game.remove(in_game.get(i));
-                break;
+    public Player[] getPair(String target){
+        for (Player[] i : pairs){
+            if (i[1].getName().equals(target)){
+                return i;
             }
         }
+        return null;
+    }
+
+
+    public void addPlayer(Player player){ in_game.add(player); randomize(); }
+    public void removePlayer(String name){
+        killedPlayer(name);
         for (int i = 0; i < dead.size(); i++) {
             if (dead.get(i).getName().equals(name)) {
                 dead.remove(dead.get(i));
@@ -83,9 +88,10 @@ public class GameSession {
         for (Player[] x : pairs){
             if (x[1] == player){
                 Player killer = x[0];
+                killer.targetKilled();
                 for (Player[] y: pairs){
                     if (y[0] == player){
-                        Player[] tempPair = {killer, y[0]};
+                        Player[] tempPair = {killer, y[1]};
                         pairs.add(tempPair);
                         pairs.remove(x);
                         pairs.remove(y);
@@ -101,6 +107,8 @@ public class GameSession {
 
     private void reset(){
         in_game.addAll(dead);
+        pairs.clear();
+        dead.clear();
 //        for (Player i : in_game){
 //            i.setDeath(0);
 //            i.setScore(0);
@@ -112,13 +120,21 @@ public class GameSession {
         reset();
         ArrayList<Player> temp = new ArrayList<>(in_game);
 
-        for (int i = 0; i < in_game.size(); i++){
-            Player randomSelected = getRandomPlayer(temp);
-            if (randomSelected == in_game.get(i))
-                randomSelected = getRandomPlayer(temp);
-            temp.remove(randomSelected);
-            Player[] tempPair = {in_game.get(i), randomSelected};
+        if (temp.size() == 1){
+            Player[] tempPair = {temp.get(0), temp.get(0)};
             pairs.add(tempPair);
+        }
+
+        if (temp.size() > 1){
+            for (Player i : in_game){
+                Player randomSelected = getRandomPlayer(temp);
+                while(randomSelected.getName().equals(i.getName()))
+                    randomSelected = getRandomPlayer(temp);
+                temp.remove(randomSelected);
+
+                Player[] tempPair = {i, randomSelected};
+                pairs.add(tempPair);
+            }
         }
     }
 

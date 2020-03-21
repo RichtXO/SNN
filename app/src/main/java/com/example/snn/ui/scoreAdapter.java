@@ -29,7 +29,8 @@ class scoreAdapter extends ArrayAdapter<Player> {
         TextView score = scoreView.findViewById(R.id.displayScore);
         TextView death = scoreView.findViewById(R.id.displayDeath);
 
-        name.setText(getItem(position).getName());
+        String playerName = getItem(position).getName();
+        name.setText(playerName.substring(0,1).toUpperCase() + playerName.substring(1).toLowerCase());
         score.setText("Score: " + getItem(position).getScore());
         death.setText("Death:" + getItem(position).getDeath());
 

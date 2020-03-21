@@ -13,7 +13,6 @@ import com.example.snn.ui.HomeFragment;
 import com.example.snn.ui.KilledFragment;
 import com.example.snn.ui.RemoveFragment;
 import com.example.snn.ui.ScoreFragment;
-import com.example.snn.ui.targetDisplay;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
         RemoveFragment.removeListener, KilledFragment.killedListener, HomeFragment.homeListener,
         ScoreFragment.scoreListener {
 
-    private static final String TAG = "Message";
     GameSession game = new GameSession();
     DBHandler dbAccess;
 
@@ -81,8 +79,11 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     // Gets called by KilledFragment when a player got shot in game
     @Override
     public void killed(String name){
+        Player[] temp = game.getPair(name.toLowerCase());
         game.killedPlayer(name.toLowerCase());
-        dbAccess.updateKilled(game.getDeadPlayer(name.toLowerCase()));
+        dbAccess.updateKilled(temp[1]);
+        dbAccess.updateScored(temp[0]);
+
     }
 
 
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     public String[] getPlayerNames(){
         String[] result = new String[game.getIn_game().size()];
         for (int i = 0; i < game.getIn_game().size(); i++){
-            result[i] = (game.getIn_game()).get(i).getName();
+            String playerName = (game.getIn_game()).get(i).getName();
+            result[i] = playerName.substring(0,1).toUpperCase() + playerName.substring(1).toLowerCase();
         }
         Arrays.sort(result);
         return result;
@@ -114,10 +116,12 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
     // Gets called by ScoreFragment to have the highest scored player go on top
     @Override
     public Player[] getPlayers(){
-        Player[] result = new Player[game.getIn_game().size()];
+        Player[] result = new Player[game.getIn_game().size() + game.getDead().size()];
         int tempSize;
         for (tempSize = 0; tempSize < game.getIn_game().size(); tempSize++)
             result[tempSize] = (game.getIn_game()).get(tempSize);
+        for (int i = 0; i < game.getDead().size(); i++)
+            result[tempSize + i] = (game.getDead()).get(i);
         Arrays.sort(result);
         return result;
     }

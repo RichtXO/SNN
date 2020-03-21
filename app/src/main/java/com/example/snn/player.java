@@ -30,5 +30,5 @@ public class Player implements Comparable<Player>{
     public void targetKilled(){ this._score++; }
     public void killed(){ this._death++; }
 
-    public int compareTo(Player a){ return getScore() - a.getScore(); }
+    public int compareTo(Player a){ return a.getScore() - getScore(); }
 }
