@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
         String[] getPlayerNames();
         void randomized();
         String getTarget(String name);
+        void resetGame();
     }
 
     @Override
@@ -77,6 +79,7 @@ public class HomeFragment extends Fragment {
 
 
         FloatingActionButton randomBtn = view.findViewById(R.id.randomButton);
+        FloatingActionButton resetSBtn = view.findViewById(R.id.resetScore);
 
         randomBtn.setOnClickListener(
                 new Button.OnClickListener(){
@@ -88,6 +91,16 @@ public class HomeFragment extends Fragment {
                 }
         );
 
+        resetSBtn.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v){
+                        resetBtnClicked();
+                        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                    }
+                }
+        );
+
+
         return view;
     }
 
@@ -95,5 +108,11 @@ public class HomeFragment extends Fragment {
 
     private void randomBtnClicked(){
         activityCommander.randomized();
+        Toast.makeText(getContext(), "Game reset with old score", Toast.LENGTH_SHORT).show();
+    }
+
+    private void resetBtnClicked(){
+        activityCommander.resetGame();
+        Toast.makeText(getContext(), "Game reset", Toast.LENGTH_SHORT).show();
     }
 }

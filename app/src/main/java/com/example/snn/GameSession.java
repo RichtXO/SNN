@@ -105,12 +105,19 @@ class GameSession {
         }
     }
 
-    private void reset(){
+    public void reset(){
         in_game.addAll(dead);
         pairs.clear();
         dead.clear();
+
     }
 
+    public void resetScore(){
+        for (Player i : in_game){
+            i.setScore(0);
+            i.setDeath(0);
+        }
+    }
 
     public void randomize(){
         reset();

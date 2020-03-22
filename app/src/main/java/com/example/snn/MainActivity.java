@@ -116,7 +116,32 @@ public class MainActivity extends AppCompatActivity implements AddFragment.addLi
 
     // Gets called by HomeFragment to randomized targets for each players
     @Override
-    public void randomized() { game.randomize(); }
+    public void randomized() {
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                game.randomize();
+            }
+        };
+        Thread thread = new Thread(run);
+        thread.start();
+    }
+
+
+    @Override
+    public void resetGame() {
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                game.reset();
+                game.resetScore();
+                dbAccess.resetGame();
+                game.randomize();
+            }
+        };
+        Thread thread = new Thread(run);
+        thread.start();
+    }
 
     // Gets called by HomeFragment to get the target of that player
     @Override

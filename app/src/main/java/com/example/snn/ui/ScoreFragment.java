@@ -55,8 +55,6 @@ public class ScoreFragment extends Fragment {
             message.setText(R.string.scoreEmpty);
         }
 
-
-
         return view;
     }
 

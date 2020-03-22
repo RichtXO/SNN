@@ -67,6 +67,14 @@ class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void resetGame(){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_SCORE, 0);
+        cv.put(COLUMN_DEATH, 0);
+        db.update(TABLE_PLAYERS, cv, null, null);
+    }
+
 
     public void updateKilled(Player player){
         SQLiteDatabase db = getWritableDatabase();
